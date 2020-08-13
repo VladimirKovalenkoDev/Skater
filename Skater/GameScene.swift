@@ -13,6 +13,7 @@ class GameScene: SKScene {
     var bricks = [SKSpriteNode]()
     var brickSize = CGSize.zero
     var scrollSpeed: CGFloat = 5.0
+    let gravitySpeed: CGFloat = 1.5
     var lastUpdateTime: TimeInterval?
     let skater = Skater(imageNamed: "skater")
     
@@ -25,6 +26,10 @@ class GameScene: SKScene {
         addChild(background)
         resetSkater()
         addChild(skater)
+        
+        let tapMethod = #selector(GameScene.handleTap(tapGesture:))
+        let tapGesture = UITapGestureRecognizer(target: self, action: tapMethod)
+        view.addGestureRecognizer(tapGesture)
         
     }
     func resetSkater(){
@@ -76,6 +81,21 @@ class GameScene: SKScene {
         }
         
     }
+    func updateSkater() {
+        if skater.isOnGround == false {
+            let velosityY = skater.velosity.y - gravitySpeed
+            skater.velosity = CGPoint(x: skater.velosity.x, y: velosityY)
+            let newSkatersY: CGFloat = skater.position.y + skater.velosity.y
+            skater.position = CGPoint(x: skater.position.x, y: newSkatersY)
+            
+            if skater.position.y < skater.minimumY {
+                skater.position.y = skater.minimumY
+                skater.velosity = CGPoint.zero
+                skater.isOnGround = true
+            }
+        }
+        
+    }
     override func update(_ currentTime: TimeInterval) {
         var elapsedTime : TimeInterval = 0.0
         if let lastTimeStamp = lastUpdateTime{
@@ -90,6 +110,12 @@ class GameScene: SKScene {
         let currentScrollAmount = scrollSpeed * scrollAdjustment
                
         updateBricks(withScrollAmount: currentScrollAmount)
-            
+            updateSkater()
+    }
+    @objc func handleTap(tapGesture: UITapGestureRecognizer){
+        if skater.isOnGround {
+            skater.velosity = CGPoint(x: 0.0, y: skater.jumpSpeed)
+            skater.isOnGround = false
+        }
     }
 }
