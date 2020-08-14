@@ -16,6 +16,7 @@
 		DD697DB824E5A03C0045CB81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD697DB724E5A03C0045CB81 /* Assets.xcassets */; };
 		DD697DBB24E5A03C0045CB81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD697DB924E5A03C0045CB81 /* LaunchScreen.storyboard */; };
 		DD697DC324E5A73B0045CB81 /* Skater.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD697DC224E5A73B0045CB81 /* Skater.swift */; };
+		DD697DC524E6FBBC0045CB81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD697DC424E6FBBC0045CB81 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DD697DBA24E5A03C0045CB81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD697DBC24E5A03C0045CB81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD697DC224E5A73B0045CB81 /* Skater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skater.swift; sourceTree = "<group>"; };
+		DD697DC424E6FBBC0045CB81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				DD697DB224E5A0390045CB81 /* GameViewController.swift */,
 				DD697DC224E5A73B0045CB81 /* Skater.swift */,
 				DD697DB424E5A0390045CB81 /* Main.storyboard */,
+				DD697DC424E6FBBC0045CB81 /* ViewController.swift */,
 				DD697DB724E5A03C0045CB81 /* Assets.xcassets */,
 				DD697DB924E5A03C0045CB81 /* LaunchScreen.storyboard */,
 				DD697DBC24E5A03C0045CB81 /* Info.plist */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD697DC524E6FBBC0045CB81 /* ViewController.swift in Sources */,
 				DD697DB124E5A0390045CB81 /* GameScene.swift in Sources */,
 				DD697DC324E5A73B0045CB81 /* Skater.swift in Sources */,
 				DD697DB324E5A0390045CB81 /* GameViewController.swift in Sources */,
