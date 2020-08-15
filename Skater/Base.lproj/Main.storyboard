@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jzW-xa-Kst">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_5" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,11 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azH-9e-X26">
-                                <rect key="frame" x="60" y="175" width="80" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="5jI-bz-DA3"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azH-9e-X26">
+                                <rect key="frame" x="408" y="175" width="80" height="64"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="44"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
@@ -29,8 +26,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="azH-9e-X26" firstAttribute="centerX" secondItem="4YW-WI-GHD" secondAttribute="centerX" id="KOP-da-aH3"/>
-                            <constraint firstItem="azH-9e-X26" firstAttribute="top" secondItem="rHy-kT-OcR" secondAttribute="top" constant="383" id="dKP-VA-cEt"/>
+                            <constraint firstItem="azH-9e-X26" firstAttribute="centerX" secondItem="4YW-WI-GHD" secondAttribute="centerX" id="RPS-8K-J8F"/>
+                            <constraint firstItem="azH-9e-X26" firstAttribute="top" secondItem="rHy-kT-OcR" secondAttribute="top" constant="175" id="Vs2-f0-ZkF"/>
+                            <constraint firstItem="azH-9e-X26" firstAttribute="centerY" secondItem="4YW-WI-GHD" secondAttribute="centerY" id="kty-L9-blO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rHy-kT-OcR"/>
                     </view>
