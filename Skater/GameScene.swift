@@ -42,7 +42,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     // MARK:- Setup and Lifecycle Methods
-    
     override func didMove(to view: SKView) {
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
