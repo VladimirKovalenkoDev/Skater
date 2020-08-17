@@ -353,6 +353,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if skater.isOnGround {
             print("Jumped")
             skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+            skater.isOnGround = true
         }
     }
     
@@ -364,6 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             skater.isOnGround = true
         }
+                
         else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
             
             if let gem = contact.bodyB.node as? SKSpriteNode {

@@ -25,9 +25,9 @@ class Skater: SKSpriteNode {
         physicsBody = SKPhysicsBody(texture: skaterTexture.texture!, size: skaterTexture.size)
                    physicsBody?.isDynamic = true
                    physicsBody?.density = 6.0
-                   physicsBody?.allowsRotation = false
+                   physicsBody?.allowsRotation = true
                    physicsBody?.angularDamping = 1.0
-                   physicsBody?.affectedByGravity = true
+                  // physicsBody?.affectedByGravity = true
                    
                    physicsBody?.categoryBitMask = PhysicsCategory.skater
                    physicsBody?.collisionBitMask = PhysicsCategory.brick

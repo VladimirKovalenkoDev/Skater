@@ -11,7 +11,6 @@ import WebKit
 
 class LinkViewController: UIViewController, WKUIDelegate  {
     
-   var backButton: UIBarButtonItem?
    var webView: WKWebView!
     
   
@@ -21,11 +20,12 @@ class LinkViewController: UIViewController, WKUIDelegate  {
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         view = webView
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myURL = URL(string:"https://www.facebook.com/liza.prokudina.7")
+        let myURL = URL(string:"https://www.google.com")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
