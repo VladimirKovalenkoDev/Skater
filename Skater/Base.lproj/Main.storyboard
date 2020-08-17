@@ -1,61 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jzW-xa-Kst">
-    <device id="retina6_5" orientation="landscape" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jzW-xa-Kst">
+    <device id="retina5_5" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="l5B-wN-YqZ">
             <objects>
-                <viewController id="jzW-xa-Kst" customClass="ViewController" customModule="Skater" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jzW-xa-Kst" customClass="MainViewController" customModule="Skater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4YW-WI-GHD">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azH-9e-X26">
-                                <rect key="frame" x="408" y="175" width="80" height="64"/>
+                                <rect key="frame" x="328" y="175" width="80" height="64"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="44"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="playButtonPressed:" destination="jzW-xa-Kst" eventType="touchUpInside" id="qI5-oi-Vuw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYz-9u-L1V">
+                                <rect key="frame" x="345" y="260" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="deepButtonPressed:" destination="jzW-xa-Kst" eventType="touchUpInside" id="aCF-tm-6Nm"/>
+                                    <segue destination="ZC0-x6-fxz" kind="presentation" identifier="goLink" id="LYY-dx-Z6c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="fYz-9u-L1V" firstAttribute="centerX" secondItem="azH-9e-X26" secondAttribute="centerX" id="30D-t2-dX3"/>
                             <constraint firstItem="azH-9e-X26" firstAttribute="centerX" secondItem="4YW-WI-GHD" secondAttribute="centerX" id="RPS-8K-J8F"/>
                             <constraint firstItem="azH-9e-X26" firstAttribute="top" secondItem="rHy-kT-OcR" secondAttribute="top" constant="175" id="Vs2-f0-ZkF"/>
                             <constraint firstItem="azH-9e-X26" firstAttribute="centerY" secondItem="4YW-WI-GHD" secondAttribute="centerY" id="kty-L9-blO"/>
+                            <constraint firstItem="fYz-9u-L1V" firstAttribute="top" secondItem="azH-9e-X26" secondAttribute="bottom" constant="21" id="vUy-ZE-zvu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rHy-kT-OcR"/>
                     </view>
                     <connections>
+                        <outlet property="deepLinkbutton" destination="fYz-9u-L1V" id="Jvx-de-o9g"/>
                         <outlet property="playButton" destination="azH-9e-X26" id="H4M-Ai-vTb"/>
-                        <segue destination="BV1-FR-VrT" kind="modal" identifier="playGame" modalPresentationStyle="fullScreen" id="Paz-Da-VzI"/>
+                        <segue destination="BV1-FR-VrT" kind="modal" identifier="playGame" id="Paz-Da-VzI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-yP-Q7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-548" y="66"/>
+            <point key="canvasLocation" x="194.86607142857142" y="65.217391304347828"/>
+        </scene>
+        <!--Link View Controller-->
+        <scene sceneID="m29-t7-gBz">
+            <objects>
+                <viewController id="ZC0-x6-fxz" customClass="LinkViewController" customModule="Skater" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IOh-3i-xjL">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ZCI-Lq-gE6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bg4-Bs-xkQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194.83695652173915" y="827.536231884058"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Skater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAH-EQ-TtH">
+                                <rect key="frame" x="356" y="0.0" width="24" height="46"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="pause.rectangle.fill" catalog="system">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="iiB-UF-bmP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GAH-EQ-TtH" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="7oi-Hw-f80"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="GAH-EQ-TtH" secondAttribute="bottom" constant="368" id="Gaa-np-9cw"/>
+                            <constraint firstItem="GAH-EQ-TtH" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="ulC-b5-jRo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Y4j-e2-oFH"/>
+                    <connections>
+                        <outlet property="backbutton" destination="GAH-EQ-TtH" id="hNY-XQ-fK1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="426" y="66"/>
+            <point key="canvasLocation" x="1167.8571428571429" y="65.217391304347828"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pause.rectangle.fill" catalog="system" width="128" height="93"/>
+    </resources>
 </document>

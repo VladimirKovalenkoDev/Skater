@@ -164,8 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             updateHighScoreLabelText()
         }
-        
-        startGame()
+                startGame()
     }
     
     

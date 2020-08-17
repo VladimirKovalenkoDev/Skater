@@ -7,16 +7,42 @@
 //
 
 import UIKit
-
+import FacebookCore
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+   
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+            // Get user consent
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+            Settings.isAutoInitEnabled = true
+            ApplicationDelegate.initializeSDK(nil)
+            AppLinkUtility.fetchDeferredAppLink { (url, error) in
+                if let error = error {
+                    print("Received error while fetching deferred app link %@", error)
+                }
+                if let url = url {
+                    if #available(iOS 10, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            }
+        return true;
+    }
+   
+        
+   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled = ApplicationDelegate.shared.application(app, open: url, options: options)
+
+      // Add any custom logic here.
+      
+      return handled
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

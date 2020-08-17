@@ -12,7 +12,9 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var backbutton: UIButton!
    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,5 +59,9 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
