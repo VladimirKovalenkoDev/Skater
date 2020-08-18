@@ -13,6 +13,7 @@ struct PhysicsCategory {
     static let skater: UInt32 = 0x1 << 0
     static let brick: UInt32 = 0x1 << 1
     static let gem: UInt32 = 0x1 << 2
+    static let pad: UInt32 = 0x1 << 1
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -28,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var bricks = [SKSpriteNode]()
     var gems = [SKSpriteNode]()
+    var bads = [SKSpriteNode]()
     var brickSize = CGSize.zero
     var brickLevel = BrickLevel.low
     var scrollSpeed: CGFloat = 5.0
@@ -154,6 +156,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for gem in gems {
             removeGem(gem)
         }
+        for bad in bads{
+            removeGem(bad)
+        }
     }
     
     func gameOver() {
@@ -212,7 +217,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
+    func spawnBadShit(atPosition position : CGPoint){
+        let bad = SKSpriteNode(imageNamed: "bad")
+        bad.position = position
+        bad.zPosition = 9
+        addChild(bad)
+        
+        bad.physicsBody = SKPhysicsBody(circleOfRadius: max(bad.size.width/1000,bad.size.height/1000))//(rectangleOf: bad.size/2.0, center: bad.centerRect.origin)
+        bad.physicsBody?.categoryBitMask = PhysicsCategory.pad
+        //bad.physicsBody?.collisionBitMask = 0
+        bad.physicsBody?.affectedByGravity = false
+        
+        bads.append(bad)
+    }
     // MARK:- Update Methods
     
     func updateBricks(withScrollAmount currentScrollAmount: CGFloat) {
@@ -246,7 +263,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let brickY = (brickSize.height / 2.0) + brickLevel.rawValue
             
             let randomNumber = arc4random_uniform(99)
-            
+            let randomAmount = CGFloat(arc4random_uniform(150))
+            let newPadX = brickX + randomAmount + 20.0
+            let newPadY = brickY + skater.size.height
             if randomNumber < 2 && score > 10 {
             
                 let gap = 20.0 * scrollSpeed
@@ -255,16 +274,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let randomGemYAmount = CGFloat(arc4random_uniform(150))
                 let newGemY = brickY + skater.size.height + randomGemYAmount
                 let newGemX = brickX - gap / 2.0
-                
+               
                 spawnGem(atPosition: CGPoint(x: newGemX, y: newGemY))
+                
             }
             else if randomNumber < 4 && score > 20 {
                 
                 if brickLevel == .high {
                     brickLevel = .low
+                    
+                    spawnBadShit(atPosition: CGPoint(x: newPadX, y: newPadY))
                 }
                 else if brickLevel == .low {
                     brickLevel = .high
+                  
                 }
             }
             
@@ -284,7 +307,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
+    func updateBad(withScrollAmount currentScrollAmount: CGFloat){
+        for pad in bads {
+            let padX = pad.position.x - currentScrollAmount
+            pad.position = CGPoint(x: padX, y: pad.position.y)
+            if pad.position.x < 0.0 {
+                
+                removeGem(pad)
+            }
+        }
+    }
     func updateSkater() {
         
         if let velocityY = skater.physicsBody?.velocity.dy {
@@ -342,6 +374,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateSkater()
         updateGems(withScrollAmount: currentScrollAmount)
         updateScore(withCurrentTime: currentTime)
+        updateBad(withScrollAmount: currentScrollAmount)
     }
     
     
@@ -374,6 +407,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score += 50
                 updateScoreLabelText()
             }
+            else if contact.bodyB.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.pad {
+                if let bad = contact.bodyB.node as? SKSpriteNode{
+                    print("\(bad) hit")
+                    score -= 100
+                    updateScoreLabelText()
+                }
+                }
         }
     }
 }

@@ -1,16 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "skeleton-fly_00.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "skater@2x.png",
+      "filename" : "skeleton-fly_01.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "skater@3x.png",
+      "filename" : "skeleton-fly_02.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
