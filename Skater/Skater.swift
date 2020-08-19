@@ -31,8 +31,8 @@ class Skater: SKSpriteNode {
                    
                    physicsBody?.categoryBitMask = PhysicsCategory.skater
                    physicsBody?.collisionBitMask = PhysicsCategory.brick
-        physicsBody?.collisionBitMask = PhysicsCategory.pad
-        physicsBody?.contactTestBitMask = PhysicsCategory.brick | PhysicsCategory.gem | PhysicsCategory.pad
+        //physicsBody?.collisionBitMask = PhysicsCategory.bad
+        physicsBody?.contactTestBitMask = PhysicsCategory.brick | PhysicsCategory.gem | PhysicsCategory.bad
                
         
         

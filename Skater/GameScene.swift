@@ -13,7 +13,7 @@ struct PhysicsCategory {
     static let skater: UInt32 = 0x1 << 0
     static let brick: UInt32 = 0x1 << 1
     static let gem: UInt32 = 0x1 << 2
-    static let pad: UInt32 = 0x1 << 1
+    static let bad: UInt32 = 0x1 << 2
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -223,12 +223,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bad.zPosition = 9
         addChild(bad)
         
-        bad.physicsBody = SKPhysicsBody(circleOfRadius: max(bad.size.width/1000,bad.size.height/1000))//(rectangleOf: bad.size/2.0, center: bad.centerRect.origin)
-        bad.physicsBody?.categoryBitMask = PhysicsCategory.pad
-        //bad.physicsBody?.collisionBitMask = 0
+        bad.physicsBody = SKPhysicsBody(circleOfRadius: max(bad.size.width/1000,bad.size.height/1000))
+        bad.physicsBody?.categoryBitMask = PhysicsCategory.bad
         bad.physicsBody?.affectedByGravity = false
         
         bads.append(bad)
+    }
+    func makeHit(_ bad: SKSpriteNode){
+       bad.removeFromParent()
+        
+        if let badIndex = bads.index(of: bad) {
+            bads.remove(at: badIndex)
+        }
     }
     // MARK:- Update Methods
     
@@ -407,11 +413,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score += 50
                 updateScoreLabelText()
             }
-            else if contact.bodyB.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.pad {
+             if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.bad {
                 if let bad = contact.bodyB.node as? SKSpriteNode{
-                    print("\(bad) hit")
-                    score -= 100
+                    makeHit(bad)
+                    print("HIT")
+                    score = score - 60
                     updateScoreLabelText()
+                    
                 }
                 }
         }
