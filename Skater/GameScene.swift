@@ -157,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             removeGem(gem)
         }
         for bad in bads{
-            removeGem(bad)
+        removeMonster(bad)
         }
     }
     
@@ -211,30 +211,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func removeGem(_ gem: SKSpriteNode) {
         
         gem.removeFromParent()
-        
+        print("gem")
         if let gemIndex = gems.index(of: gem) {
             gems.remove(at: gemIndex)
         }
     }
     
-    func spawnBadShit(atPosition position : CGPoint){
+    func spawnMonster(atPosition position : CGPoint){
         let bad = SKSpriteNode(imageNamed: "bad")
         bad.position = position
-        bad.zPosition = 9
+        bad.zPosition = 7
         addChild(bad)
         
-        bad.physicsBody = SKPhysicsBody(circleOfRadius: max(bad.size.width/1000,bad.size.height/1000))
-        bad.physicsBody?.categoryBitMask = PhysicsCategory.bad
+        bad.physicsBody = SKPhysicsBody(circleOfRadius: max(bad.size.width/100, bad.size.height/100))
         bad.physicsBody?.affectedByGravity = false
+        bad.physicsBody?.categoryBitMask = PhysicsCategory.bad
+        
+       
         
         bads.append(bad)
     }
-    func makeHit(_ bad: SKSpriteNode){
-       bad.removeFromParent()
-        
+    func  removeMonster (_ bad: SKSpriteNode){
+        bad.removeFromParent()
+        makeHit()
         if let badIndex = bads.index(of: bad) {
             bads.remove(at: badIndex)
         }
+    }
+    func makeHit(){
+       
+        print("hit")
+        score = score - 100
+        print("\(score)")
+        updateScoreLabelText()
+        run(SKAction.playSoundFileNamed("monster.wav", waitForCompletion: false))
+        
     }
     // MARK:- Update Methods
     
@@ -289,7 +300,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if brickLevel == .high {
                     brickLevel = .low
                     
-                    spawnBadShit(atPosition: CGPoint(x: newPadX, y: newPadY))
+                    spawnMonster(atPosition: CGPoint(x: newPadX, y: newPadY))
                 }
                 else if brickLevel == .low {
                     brickLevel = .high
@@ -314,12 +325,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     func updateBad(withScrollAmount currentScrollAmount: CGFloat){
-        for pad in bads {
-            let padX = pad.position.x - currentScrollAmount
-            pad.position = CGPoint(x: padX, y: pad.position.y)
-            if pad.position.x < 0.0 {
+        for bad in bads {
+            let badX = bad.position.x - currentScrollAmount
+            bad.position = CGPoint(x: badX, y: bad.position.y)
+            if bad.position.x < 0.0 {
                 
-                removeGem(pad)
+                removeMonster(bad)
             }
         }
     }
@@ -412,16 +423,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 score += 50
                 updateScoreLabelText()
+                run(SKAction.playSoundFileNamed("gem.wav", waitForCompletion: false))
             }
-             if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.bad {
+               else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.bad {
+               
                 if let bad = contact.bodyB.node as? SKSpriteNode{
-                    makeHit(bad)
-                    print("HIT")
-                    score = score - 60
-                    updateScoreLabelText()
-                    
+                    removeMonster(bad)
                 }
-                }
+            }
+             
         }
     }
 }

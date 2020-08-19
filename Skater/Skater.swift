@@ -27,12 +27,12 @@ class Skater: SKSpriteNode {
                    physicsBody?.density = 6.0
                    physicsBody?.allowsRotation = false
                    physicsBody?.angularDamping = 1.0
-                  // physicsBody?.affectedByGravity = true
+                  
                    
-                   physicsBody?.categoryBitMask = PhysicsCategory.skater
-                   physicsBody?.collisionBitMask = PhysicsCategory.brick
-        //physicsBody?.collisionBitMask = PhysicsCategory.bad
+        physicsBody?.categoryBitMask = PhysicsCategory.skater
+        physicsBody?.collisionBitMask = PhysicsCategory.brick 
         physicsBody?.contactTestBitMask = PhysicsCategory.brick | PhysicsCategory.gem | PhysicsCategory.bad
+        
                
         
         
